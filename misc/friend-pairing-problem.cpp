@@ -5,9 +5,9 @@ using namespace std;
 int dp[100];
 
 int ways(int n) {
-    if (n == 1 || n == 0) return n;
+    if (n == 1 || n == 0) return 1;
     if (dp[n] != -1) return dp[n];
-    dp[n] = max(ways(n - 1), (n - 1) + ways(n - 2));
+    dp[n] = ways(n - 1) + (n - 1) * ways(n - 2);
     return dp[n];
 }
 
