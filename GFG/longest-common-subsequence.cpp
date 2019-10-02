@@ -20,14 +20,14 @@ int lcs(string a, string b, int c, int d) {
 }
 
 int main() {
-    int T;
-    cin >> T;
+    int T;  
+    cin >> T;  // input no. of test cases
     while (T--) {
         int c, d;
-        cin >> c >> d;
+        cin >> c >> d; //taking length of two strings
         string a, b;
-        cin >> a >> b;
-        cout << lcs(a, b, c, d) << endl;
+        cin >> a >> b; //input 2 strings
+        cout << lcs(a, b, c, d) << endl;  //Function Calling lcs
     }
     //code
     return 0;
