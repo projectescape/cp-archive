@@ -1,20 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long fastPow(long long a, long long b)
+long long fastPow(int a, int b)
 {
     if (b == 1)
         return a;
 
-    if (b & 1 == 0)
-        return fastPow(a, b / 2) * fastPow(a, b / 2);
-    return a * fastPow(a, b / 2) * fastPow(a, b / 2);
+    long long ans = fastPow(a, b / 2) * fastPow(a, b / 2);
+
+    if ((b & 1) == 0)
+        return ans;
+
+    return a * ans;
 }
 
 int main()
 {
-    long long a = 2;
-    long long b = 3;
+    int a = 5;
+    int b = 2;
 
-    cout << fastPow(2, 3) << endl;
+    cout << fastPow(a, b) << endl;
 }
