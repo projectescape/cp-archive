@@ -5,45 +5,84 @@ int main() {
     int T;
     cin >> T;
     while (T--) {
-        int a, k, temp, b;
-        cin >> a >> k;
-        int sum = 0;
+        int a, k, temp, sum = 0;
+        cin >> a;
+        cin >> k;
         vector<int> v;
         for (int i = 0; i < a; i++) {
             cin >> temp;
-            if (temp <= k)
+            if (temp <= k) {
+                sum += temp;
+            } else {
                 sum += k;
-            else {
-                b = temp % k;
-                if (b != 0) {
-                    sum += b;
-                    v.push_back(temp / k);
-                } else {
-                    sum += k;
-                    v.push_back((temp / k) - 1);
-                }
+                v.push_back(temp - k);
             }
         }
         int size = v.size();
-        sort(v.begin(), v.end(), greater<int>());
-        for (int i = 0; i < size - 1; i++) {
+        sort(v.begin(), v.end());
+
+        // cout << "At line 24 sum : " << sum << " Array : ";
+        // for (int i = 0; i < size; i++) {
+        //     cout << v[i] << " ";
+        // }
+        // cout << endl;
+
+        for (int i = 0; i < size; i++) {
+            // cout << "At line 31 i : " << i << " sum : " << sum << " Array : ";
+            // for (int i = 0; i < size; i++) {
+            //     cout << v[i] << " ";
+            // }
+            // cout << endl;
             if (v[i] == 0) continue;
-            for (int j = i + 1; j < size && v[i] > 0; j++) {
+            for (int j = i + 1; j < size;) {
                 if (v[j] == 0) {
+                    j++;
                     continue;
                 }
-                if (v[i] > v[j]) {
-                    v[i] = v[i] - v[j];
-                    v[j] = 0;
-                } else {
-                    v[j] = v[j] - v[i];
+                if (v[i] < v[j]) {
+                    v[j] -= v[i];
                     v[i] = 0;
+                    break;
+                } else {
+                    v[i] -= v[j];
+                    v[j] = 0;
+                    j++;
                 }
             }
         }
+        // cout << "At line 55 sum : " << sum << " Array : ";
+        // for (int i = 0; i < size; i++) {
+        //     cout << v[i] << " ";
+        // }
+        // cout << endl;
         for (int i = 0; i < size; i++) {
-            sum += (v[i] * k);
+            sum += v[i];
         }
         cout << sum << '\n';
     }
 }
+
+// For input
+
+// 6
+// 2 1
+// 1 2
+// 2 1
+// 2 2
+// 3 1
+// 2 3 2
+// 4 5
+// 2 10 35 20
+// 5 3
+// 3 4 5 6 11
+// 2 2
+// 3 2
+
+// Output given
+
+// 3
+// 2
+// 5
+// 37
+// 21
+// 5
