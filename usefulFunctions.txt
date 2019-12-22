@@ -1,0 +1,12 @@
+*****
+lower_bound(s,e,key);
+Gives first occurence it of key in sorted container.
+*****
+upper_bound(s,e,key);
+Gives last occurence it of key in sorted container.
+*****
+To find no of occurencesm upper_bound-lower_bound
+*****
+binary_search(s,e,key,comp);
+Returns it of key. 
+*****
