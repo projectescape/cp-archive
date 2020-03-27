@@ -4,6 +4,8 @@ using namespace std;
 class Solution {
    public:
     int lengthOfLongestSubstring(string s) {
+        if (s == "") return 0;
+        // if (s.size() == 1) return 1;
         int occ[128] = {0};
         int ans = 0, curr = 0;
         if ((s[0]) >= 0 && (s[0]) < 128) {
@@ -24,6 +26,8 @@ class Solution {
                 cout << "i = " << i << ", j = " << j << endl;
                 cout << "occ[" << s[i] << "] = " << occ[s[i]] << ", occ[" << s[j] << "] = " << occ[s[j]] << endl;
                 if (occ[s[j]] == 2) {
+                    ans = max(ans, curr);
+                    curr--;
                     occ[s[i]] -= 1;
                     occ[s[j]] -= 1;
                     break;
@@ -32,7 +36,6 @@ class Solution {
                 }
             }
             ans = max(ans, curr);
-            curr--;
             curr--;
         }
         ans = max(ans, curr);
@@ -43,7 +46,7 @@ class Solution {
 int main() {
     cout << "Here" << endl;
     Solution obj;
-    string s = "a";
+    string s = "aaaaaaaaabca";
     int ans = obj.lengthOfLongestSubstring(s);
     cout << "Ans = " << ans << endl;
 }
