@@ -1,52 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+bool searchWord(vector<vector<char>> &board, vector<vector<bool>> &dp, string &word, int i, int j, int &m, int &n, int index) {
+    if (index == word.size()) return true;
+    if (i >= m || i < 0 || j >= n || j < 0 || word[index] != board[i][j] || dp[i][j] == false) return false;
+
+    dp[i][j] = false;
+
+    if (searchWord(board, dp, word, i + 1, j, m, n, index + 1)) return true;
+    if (searchWord(board, dp, word, i - 1, j, m, n, index + 1)) return true;
+    if (searchWord(board, dp, word, i, j + 1, m, n, index + 1)) return true;
+    if (searchWord(board, dp, word, i, j - 1, m, n, index + 1)) return true;
+
+    dp[i][j] = true;
+    return false;
+}
+
 class Solution {
    public:
-    bool exist(vector<vector<char>>& board, string word) {
+    bool exist(vector<vector<char>> &board, string word) {
+        if (word.size() == 0) return true;
         int m = board.size(), n = board[0].size();
+        vector<vector<bool>> dp(m, vector<bool>(n, true));
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (board[i][j] == word[0]) {
-                    vector<vector<bool>> dp(m, vector<bool>(n, true));
-                    dp[i][j] = false;
-                    cout << word[0] << " found at " << i << ", " << j << endl;
-                    int a = i, b = j;
-                    for (int i = 1; i <= word.size(); i++) {
-                        if (i == word.size()) return true;
-                        if (a + 1 < m && dp[a + 1][b]) {
-                            if (board[a + 1][b] == word[i]) {
-                                a++;
-                                cout << word[i] << " found at " << a << ", " << b << endl;
-                                dp[a][b] = false;
-                                continue;
-                            }
-                        }
-                        if (a - 1 >= 0 && dp[a - 1][b]) {
-                            if (board[a - 1][b] == word[i]) {
-                                a--;
-                                cout << word[i] << " found at " << a << ", " << b << endl;
-                                dp[a][b] = false;
-                                continue;
-                            }
-                        }
-                        if (b + 1 < n && dp[a][b + 1]) {
-                            if (board[a][b + 1] == word[i]) {
-                                b++;
-                                cout << word[i] << " found at " << a << ", " << b << endl;
-                                dp[a][b] = false;
-                                continue;
-                            }
-                        }
-                        if (b - 1 >= 0 && dp[a][b - 1]) {
-                            if (board[a][b - 1] == word[i]) {
-                                b--;
-                                cout << word[i] << " found at " << a << ", " << b << endl;
-                                dp[a][b] = false;
-                                continue;
-                            }
-                        }
-                        break;
+                    if (searchWord(board, dp, word, i, j, m, n, 0)) {
+                        return true;
                     }
                 }
             }
