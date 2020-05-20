@@ -1,5 +1,3 @@
-https://github.com/projectescape/---
-
 ## Accepted but improve efficiency
 
 1. https://leetcode.com/problems/longest-palindromic-substring (Faster than 5.24%)
@@ -9,5 +7,6 @@ https://github.com/projectescape/---
 1. https://leetcode.com/problems/3sum/ (Faster than 22.45%)
 1. https://leetcode.com/problems/shortest-unsorted-continuous-subarray (Faster than 33.86%)
 1. https://leetcode.com/problems/daily-temperatures/
+1. https://leetcode.com/problems/online-stock-span/ (Faster than 15%)
 
 ---
