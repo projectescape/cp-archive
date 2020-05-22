@@ -1,3 +1,5 @@
+// Much better solution using dp
+// https://leetcode.com/problems/count-square-submatrices-with-all-ones/discuss/441306/JavaC%2B%2BPython-DP-solution
 
 void boxes(vector<vector<int>> &matrix, int &i, int &j, int &m, int &n, int &ans) {
     ans++;
