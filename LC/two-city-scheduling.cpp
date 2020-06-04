@@ -1,3 +1,6 @@
+// https://leetcode.com/problems/two-city-scheduling/discuss/278716/C%2B%2B-O(n-log-n)-sort-by-savings
+// Smarter Solution
+
 int ans(vector<vector<int>>& c, vector<vector<int>>& dp, int c1, int c2, int& n) {
     if ((c1 == n) && (c2 == n)) return 0;
 
