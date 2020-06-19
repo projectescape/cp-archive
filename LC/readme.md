@@ -9,5 +9,6 @@
 1. https://leetcode.com/problems/daily-temperatures/
 1. https://leetcode.com/problems/online-stock-span/ (Faster than 15%)
 1. https://leetcode.com/problems/uncrossed-lines/ (Faster than 11%)
+1. https://leetcode.com/problems/partition-equal-subset-sum/ (Faster Than 5%)
 
 ---
