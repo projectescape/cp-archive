@@ -12,3 +12,9 @@
 1. https://www.interviewbit.com/problems/minimum-characters-required-to-make-a-string-palindromic/ (Either getting TLE or MLE)
 
 ---
+
+## To improve
+
+1. https://www.interviewbit.com/problems/gray-code/
+
+---
