@@ -1,27 +1,32 @@
+// https://practice.geeksforgeeks.org/problems/longest-common-substring/0
+
 #include <bits/stdc++.h>
 using namespace std;
 
-string A, B;
-int helper(int a, int b, vector<vector<int>> &dp) {
-    if (a >= A.size() || b >= B.size()) return 0;
-    if (dp[a][b] != -1) return dp[a][b];
-    if (A[a] == B[b]) {
-        dp[a][b] = 1 + helper(a + 1, b + 1, dp);
-    } else {
-        dp[a][b] = max(helper(a + 1, b, dp), helper(a, b + 1, dp));
+int longestCommonSubString(int a, int b, string c, string d, int dp[][105]) {
+    int ans = 0;
+    for (int i = 1; i <= a; i++) {
+        for (int j = 1; j <= b; j++) {
+            if (c[i - 1] == d[j - 1]) {
+                dp[i][j] = dp[i - 1][j - 1] + 1;
+                ans = max(ans, dp[i][j]);
+            }
+        }
     }
-
-    return dp[a][b];
+    return ans;
 }
 
 int main() {
-    int T, temp;
-    cin >> T;
-    while (T--) {
-        cin >> temp >> temp;
-        cin >> A >> B;
-        vector<vector<int>> dp(A.size(), vector<int>(B.size(), -1));
-        cout << helper(0, 0, dp) << endl;
+    int t;
+    cin >> t;
+    while (t--) {
+        int a, b;
+        cin >> a >> b;
+        string c, d;
+        cin >> c >> d;
+        int dp[105][105];
+        memset(dp, 0, sizeof dp);
+        cout << longestCommonSubString(a, b, c, d, dp) << endl;
     }
 
     return 0;
