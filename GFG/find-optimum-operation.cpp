@@ -1,32 +1,30 @@
-// https://practice.geeksforgeeks.org/problems/find-optimum-operation/0
-
 #include <bits/stdc++.h>
 using namespace std;
 
-int dp[10005];
+int n;
 
-int ways(int n) {
-    if (n == 1 || n == 0) return n;
-    if (dp[n] != -1) return dp[n];
-    int temp;
-    if (n % 2 == 0) {
-        temp = min(1 + ways(n - 1), 1 + ways(n / 2));
-    } else {
-        temp = 1 + ways(n - 1);
+int helper(int pos, vector<int>& dp) {
+    if (pos > n) {
+        return INT_MAX;
     }
-    dp[n] = temp;
-    return dp[n];
+    if (dp[pos] == -1) {
+        dp[pos] = 1 + min(helper(pos * 2, dp), helper(pos + 1, dp));
+    }
+    return dp[pos];
 }
 
 int main() {
-    memset(dp, -1, sizeof dp);
-    int t;
-    cin >> t;
-    while (t--) {
-        int n, ans;
+    int T;
+    cin >> T;
+    while (T--) {
         cin >> n;
-        ans = ways(n);
-        cout << ans << endl;
+        if (n == 0) {
+            cout << 0 << endl;
+            continue;
+        }
+        vector<int> dp(n + 1, -1);
+        dp[n] = 0;
+        cout << 1 + helper(1, dp) << endl;
     }
     return 0;
 }
