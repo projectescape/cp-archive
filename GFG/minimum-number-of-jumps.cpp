@@ -1,42 +1,32 @@
-// https://practice.geeksforgeeks.org/problems/minimum-number-of-jumps/0
-
 #include <bits/stdc++.h>
 using namespace std;
 
-int calculate(int n, vector<int> dp, vector<int> v) {
-    if (n == 0) {
-        return 0;
-    }
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 1; j <= v[i] && i + j < n; j++) {
-            if (dp[i] == INT_MAX) {
-                break;
-            }
-            dp[i + j] = min(dp[i + j], dp[i] + 1);
+int helper(int pos, vector<int> &nums, vector<int> &dp) {
+    if (pos == nums.size() - 1) return 0;
+    if (dp[pos] == -1) {
+        dp[pos] = INT_MAX;
+        int temp;
+        for (int i = 1; i <= nums[pos] && i + pos < nums.size(); i++) {
+            temp = helper(pos + i, nums, dp);
+            if (temp != INT_MAX)
+                dp[pos] = min(dp[pos], 1 + temp);
         }
     }
-    if (dp[n - 1] == INT_MAX) {
-        return -1;
-    }
-    return dp[n - 1];
+    return dp[pos];
 }
 
 int main() {
-    int t;
-    cin >> t;
-    while (t--) {
-        vector<int> dp;
-        vector<int> v;
-        int n, ans;
+    int T, n, temp;
+    cin >> T;
+    while (T--) {
         cin >> n;
+        vector<int> nums, dp(n, -1);
         for (int i = 0; i < n; i++) {
-            cin >> ans;
-            v.push_back(ans);
-            dp.push_back(INT_MAX);
+            cin >> temp;
+            nums.push_back(temp);
         }
-        dp[0] = 0;
-        ans = calculate(n, dp, v);
-        cout << ans << endl;
+        temp = helper(0, nums, dp);
+        cout << (temp == INT_MAX ? -1 : temp) << endl;
     }
     return 0;
 }
