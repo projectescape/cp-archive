@@ -15,6 +15,5 @@ int Solution::solve(int A, vector<int> &B) {
             }
         }
     }
-
     return ans;
 }
