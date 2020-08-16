@@ -7,6 +7,7 @@
 1. https://www.interviewbit.com/problems/count-permutations-of-bst/
 1. https://www.interviewbit.com/problems/word-break-ii/
 1. https://www.interviewbit.com/problems/valid-path/
+1. https://www.interviewbit.com/problems/next-permutation/
 
 ---
 
