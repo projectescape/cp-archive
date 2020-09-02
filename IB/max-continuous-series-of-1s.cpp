@@ -1,33 +1,24 @@
 vector<int> Solution::maxone(vector<int> &A, int B) {
-    int wl = 0;  //left window pointer
-    int wr = 0;  //right window pointer
-    int best_left = 0;
-    int best_right = 0;
-    int max_window_size = INT_MIN;
-    int n = A.size();
-    int num_zero = 0;
-
-    while (wr < n) {
-        if (A[wr] == 0)
-            num_zero++;
-
-        while (num_zero > B) {
-            if (A[wl] == 0)
-                num_zero--;
-            wl++;
+    int s = 0, e = 0;
+    int max = 0;
+    for (int i = 0, j = 0; j < A.size(); j++) {
+        if (A[j] == 0) {
+            B--;
+            if (B < 0) {
+                while (A[i] == 1) i++;
+                i++;
+                B++;
+            }
         }
-
-        if (wr - wl + 1 > max_window_size) {
-            max_window_size = wr - wl + 1;
-            best_left = wl;
-            best_right = wr;
+        if (j - i > max) {
+            max = j - i;
+            s = i;
+            e = j;
         }
-        wr++;
     }
-
     vector<int> ans;
-    for (int i = best_left; i <= best_right; i++)
+    for (int i = s; i <= e; i++) {
         ans.push_back(i);
-
+    }
     return ans;
 }

@@ -1,15 +1,14 @@
 ListNode* Solution::deleteDuplicates(ListNode* A) {
     if (!A) return A;
-    for (; A->next && A->next->val == A->val; A = A->next)
-        ;
-    ListNode *temp = A->next, *curr = A;
-    while (temp) {
-        for (; temp && temp->next && temp->next->val == temp->val; temp = temp->next)
-            ;
-        curr->next = temp;
-        curr = temp;
-        temp = temp->next;
+    ListNode* temp;
+    for (ListNode* curr = A; curr && curr->next;) {
+        if (curr->next->val == curr->val) {
+            temp = curr->next;
+            curr->next = temp->next;
+            delete temp;
+        } else {
+            curr = curr->next;
+        }
     }
-    curr->next = NULL;
     return A;
 }
