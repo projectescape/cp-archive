@@ -1,31 +1,55 @@
-vector<int> Solution::spiralOrder(const vector<vector<int> > &A) {
-    int t = 0, b = A.size() - 1, l = 0, r = A[0].size() - 1, i;
-    vector<int> ans;
-    while (t <= b && l <= r) {
-        if (t <= b && l <= r) {
-            for (i = l; i <= r; i++) {
-                ans.push_back(A[t][i]);
-            }
-            t++;
+vector<int> Solution::spiralOrder(const vector<vector<int>> &A)
+{
+    vector<int> answer;
+
+    bool isIteratingThroughRow = true;
+
+    bool isRowBeingIncremented = true;
+    bool isColBeingIncremented = true;
+
+    int numOfRows = A.size();
+    int numOfCol = A[0].size();
+
+    int currCol = 0, currRow = 0;
+    bool shouldBreak = false;
+
+    answer.push_back(A[0][0]);
+
+    int iterationNumber = 1;
+
+    while (true)
+    {
+        if (answer.size() == numOfRows * numOfCol)
+        {
+            break;
         }
-        if (t <= b && l <= r) {
-            for (i = t; i <= b; i++) {
-                ans.push_back(A[i][r]);
+        if (isIteratingThroughRow)
+        {
+            int unitToAddToCol = isColBeingIncremented ? +1 : -1;
+            currCol += unitToAddToCol;
+            while ((currCol < numOfCol - (iterationNumber / 4)) && (currCol >= (iterationNumber / 4)))
+            {
+                answer.push_back(A[currRow][currCol]);
+                currCol += unitToAddToCol;
             }
-            r--;
+            currCol -= unitToAddToCol;
+            isIteratingThroughRow = false;
+            isColBeingIncremented = !isColBeingIncremented;
         }
-        if (t <= b && l <= r) {
-            for (i = r; i >= l; i--) {
-                ans.push_back(A[b][i]);
+        else
+        {
+            int unitToAddToRow = isRowBeingIncremented ? +1 : -1;
+            currRow += unitToAddToRow;
+            while ((currRow < numOfRows - (iterationNumber / 4)) && (currRow >= (iterationNumber / 4)))
+            {
+                answer.push_back(A[currRow][currCol]);
+                currRow += unitToAddToRow;
             }
-            b--;
+            currRow -= unitToAddToRow;
+            isIteratingThroughRow = true;
+            isRowBeingIncremented = !isRowBeingIncremented;
         }
-        if (t <= b && l <= r) {
-            for (i = b; i >= t; i--) {
-                ans.push_back(A[i][l]);
-            }
-            l++;
-        }
+        iterationNumber++;
     }
-    return ans;
+    return answer;
 }
