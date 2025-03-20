@@ -1,32 +1,54 @@
-int Solution::books(vector<int> &C, int A) {
-    if (C.size() < A) return -1;
-    int e = 0, s = INT_MIN;
+int isFeasible(vector<int> &A, int numOfPages, int expectedNumberOfStudents)
+{
+    int students = 1, sum = 0;
 
-    for (auto i : C) {
-        e += i;
-        s = max(s, i);
-    }
-    long long ans = LLONG_MAX, i, j, k, m;
-    for (; s <= e;) {
-        m = (s + e) / 2;
-        for (i = j = k = 0; i < C.size() && k < A; i++) {
-            j += C[i];
-            if (j > m) {
-                i--;
-                k++;
-                j = 0;
-            } else if (j == m) {
-                k++;
-                j = 0;
-            }
+    for (int i : A)
+    {
+        if (sum + i <= numOfPages)
+        {
+            sum += i;
         }
-        if (k < A || (k == A && i == C.size())) {
-            ans = min(ans, m);
-            e = m - 1;
-        } else {
-            s = m + 1;
+        else
+        {
+            students++;
+            sum = i;
         }
     }
-    if (ans == LLONG_MAX) return -1;
-    return ans;
+
+    return students <= expectedNumberOfStudents;
 }
+
+int Solution::books(vector<int> &A, int B)
+{
+
+    if (B > A.size())
+        return -1;
+
+    int minPages = INT_MIN, maxPages = 0;
+
+    for (int i : A)
+    {
+        minPages = max(minPages, i);
+        maxPages += i;
+    }
+
+    int result = 0;
+
+    while (minPages <= maxPages)
+    {
+        int mid = (minPages + maxPages) / 2;
+        if (isFeasible(A, mid, B))
+        {
+            result = mid;
+            maxPages = mid - 1;
+        }
+        else
+        {
+            minPages = mid + 1;
+        }
+    }
+
+    return result;
+}
+
+// [12, 34, 67, 90]
